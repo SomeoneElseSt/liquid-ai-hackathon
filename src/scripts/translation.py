@@ -147,12 +147,23 @@ def configure_llm():
     return client
 
 def translate_text(client: genai.Client, text: str, retry_count: int = 0):
-    """Translates a single piece of text synchronously with retry logic."""
+    """
+    Translates text, using deterministic rules for simple cases.
+    Returns a tuple: (translation_string, llm_was_called_boolean).
+    """
     cleaned_text = clean_input_text(text)
     
     if not cleaned_text:
-        return ""
-    
+        return "", False
+
+    lower_cleaned_text = cleaned_text.lower()
+    if lower_cleaned_text == 'normal':
+        return "normal examination", False
+    if lower_cleaned_text == 'nódulo' or lower_cleaned_text == 'nodulo':
+        return "nodule", False
+    if lower_cleaned_text == 'micros' or lower_cleaned_text == 'micro':
+        return "microcalcifications", False
+    # If not a simple case, proceed with LLM translation
     try:
         # Construct the prompt with system instruction
         full_prompt = f"{SYSTEM_PROMPT}\n\nTranslate the following text:\n{cleaned_text}"
@@ -169,9 +180,9 @@ def translate_text(client: genai.Client, text: str, retry_count: int = 0):
                 time.sleep(REQUEST_DELAY * (retry_count + 1))
                 return translate_text(client, text, retry_count + 1)
             print(f"    Error: Failed to get valid translation for '{cleaned_text[:30]}...' after {MAX_RETRIES} retries")
-            return "[Translation Error]"
+            return "[Translation Error]", True
         
-        return translation
+        return translation, True
     
     except Exception as e:
         if "RESOURCE_EXHAUSTED" in str(e) and retry_count < MAX_RETRIES:
@@ -186,7 +197,7 @@ def translate_text(client: genai.Client, text: str, retry_count: int = 0):
             return translate_text(client, text, retry_count + 1)
         
         print(f"    Error: Translation failed for '{cleaned_text[:30]}...' after {MAX_RETRIES} retries: {e}")
-        return "[Translation Error]"
+        return "[Translation Error]", True
 
 def main():
     """Main function to orchestrate the translation process."""
@@ -214,12 +225,12 @@ def main():
     for i, note in enumerate(notes_to_translate):
         print(f"  - Processing row {i + 1}/{total_rows}...")
         
-        translation = translate_text(client, note)
+        translation, llm_used = translate_text(client, note)
         print(f"    -> Row {i + 1} Translation: {translation}")
         all_translations.append(translation)
         
-        # Respect the rate limit before the next request
-        if i < total_rows - 1:
+        # Respect the rate limit before the next request, only if LLM was used
+        if llm_used and i < total_rows - 1:
             time.sleep(REQUEST_DELAY)
             
     print("Translation complete.")
