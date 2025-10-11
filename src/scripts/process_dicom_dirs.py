@@ -7,7 +7,10 @@ import argparse
 import shutil
 from pathlib import Path
 
-DEFAULT_SOURCE_DIR = Path("src/data/physionet.org/files/vindr-mammo/1.0.0/images")
+# The project's 'src' directory, which is the parent of the 'scripts' directory.
+# This makes the default path work regardless of where the script is run from.
+SRC_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_SOURCE_DIR = SRC_ROOT / "data/physionet.org/files/vindr-mammo/1.0.0/images"
 PROCESSED_SUFFIX = "_processed"
 
 def get_arguments():
