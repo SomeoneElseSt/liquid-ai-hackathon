@@ -15,4 +15,3 @@ Notes
 
 - This is a demo landing page with an upload button. Uploaded images are saved into `uploads/`.
 - No AI inference is implemented yet; server returns a placeholder JSON response.
-- For production use with medical data, add proper security, authentication, logging, and HIPAA-compliant storage.
