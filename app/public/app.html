@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BreastScan — App</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="brand">BreastScan</div>
+      <div class="links">
+        <a href="/">Presentation</a>
+        <a href="/app.html" class="active">App</a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="hero">
+        <h1>BreastScan — Upload</h1>
+        <p class="tag">Upload an exam image to get an advisory classification (demo).</p>
+        <div class="upload-card">
+          <label for="image-upload" class="upload-label">Upload exam image</label>
+          <input id="image-upload" type="file" accept="image/*" />
+          <button id="upload-btn" class="primary" disabled>Upload & Analyze</button>
+          <div id="preview" class="preview"></div>
+          <div id="result" class="result"></div>
+        </div>
+      </section>
+      <footer class="footer">For demo use only. Not a medical device.</footer>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
