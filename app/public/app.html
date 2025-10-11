@@ -16,20 +16,33 @@
     </nav>
 
     <main class="container">
-      <section class="hero">
-        <h1>BreastScan — Upload</h1>
-        <p class="tag">Upload an exam image to get an advisory classification (demo).</p>
-        <div class="upload-card">
-          <label for="image-upload" class="upload-label">Upload exam image</label>
-          <input id="image-upload" type="file" accept="image/*" />
-          <button id="upload-btn" class="primary" disabled>Upload & Analyze</button>
+      <div class="hero-clean">
+        <h1>BreastScan Analysis</h1>
+        <p class="tag">Upload an exam image to get an advisory classification</p>
+      </div>
+      <div class="upload-card">
+        <div class="upload-content">
+          <label for="image-upload" class="upload-label">Upload Medical Image</label>
+          <div class="upload-area">
+            <input id="image-upload" type="file" accept="image/*" />
+            <div class="upload-placeholder">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Drag and drop or click to upload</span>
+            </div>
+          </div>
+          <button id="upload-btn" class="primary" disabled>
+            <span>Analyze Image</span>
+          </button>
           <div id="preview" class="preview"></div>
           <div id="result" class="result"></div>
         </div>
-      </section>
+      </div>
       <footer class="footer">For demo use only. Not a medical device.</footer>
     </main>
 
+    <script src="/transitions.js"></script>
     <script src="/app.js"></script>
   </body>
 </html>
