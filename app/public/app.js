@@ -5,22 +5,6 @@ const result = document.getElementById('result');
 
 let selectedFile = null;
 
-// Wait for language manager to be available
-function waitForLanguageManager() {
-  return new Promise((resolve) => {
-    if (window.languageManager) {
-      resolve(window.languageManager);
-    } else {
-      const checkInterval = setInterval(() => {
-        if (window.languageManager) {
-          clearInterval(checkInterval);
-          resolve(window.languageManager);
-        }
-      }, 100);
-    }
-  });
-}
-
 uploadInput.addEventListener('change', (e) => {
   const file = e.target.files && e.target.files[0];
   selectedFile = file || null;
@@ -47,8 +31,6 @@ uploadInput.addEventListener('change', (e) => {
 uploadBtn.addEventListener('click', async () => {
   if (!selectedFile) return;
 
-  const langManager = await waitForLanguageManager();
-  
   uploadBtn.disabled = true;
   uploadBtn.innerHTML = `<span class="btn-icon">⏳</span> ${langManager.translate('app.analyzing')}`;
   result.textContent = '';
