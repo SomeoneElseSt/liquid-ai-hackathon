@@ -18,17 +18,21 @@ uploadInput.addEventListener('change', (e) => {
 
   uploadBtn.disabled = false;
 
+  // Show preview
   const img = document.createElement('img');
   img.src = URL.createObjectURL(selectedFile);
   img.onload = () => URL.revokeObjectURL(img.src);
   preview.appendChild(img);
+  
+  // Show preview section
+  preview.style.display = 'block';
 });
 
 uploadBtn.addEventListener('click', async () => {
   if (!selectedFile) return;
 
   uploadBtn.disabled = true;
-  uploadBtn.textContent = 'Uploading...';
+  uploadBtn.innerHTML = '<span class="btn-icon">⏳</span> Analyzing...';
   result.textContent = '';
 
   const form = new FormData();
@@ -40,11 +44,13 @@ uploadBtn.addEventListener('click', async () => {
 
     if (!res.ok) throw new Error(data.error || 'Upload failed');
 
-    result.innerHTML = `<strong>Uploaded:</strong> ${data.filename}<br><em>${data.message}</em>`;
+    result.innerHTML = `<strong>Analysis Complete:</strong> ${data.filename}<br><em>${data.message}</em>`;
+    result.parentElement.classList.add('show');
   } catch (err) {
-    result.textContent = `Error: ${err.message}`;
+    result.innerHTML = `<strong>Error:</strong> ${err.message}`;
+    result.parentElement.classList.add('show');
   } finally {
     uploadBtn.disabled = false;
-    uploadBtn.textContent = 'Upload & Analyze';
+    uploadBtn.innerHTML = '<span class="btn-icon">🔍</span> Upload & Analyze';
   }
 });

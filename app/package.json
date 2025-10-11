@@ -4,14 +4,22 @@
   "main": "app.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo \"No build step required for this Node.js app\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Minimal Express frontend for uploading breast exam images to a placeholder AI classification endpoint.",
   "dependencies": {
     "express": "^5.1.0",
-    "multer": "^2.0.2"
+    "fs": "^0.0.1-security",
+    "multer": "^2.0.2",
+    "path": "^0.12.7"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
