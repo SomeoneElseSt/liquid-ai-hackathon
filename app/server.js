@@ -34,19 +34,50 @@ const upload = multer({
 // Serve static frontend files from /public
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware to detect language preference
+app.use((req, res, next) => {
+  const acceptLanguage = req.headers['accept-language'];
+  const langParam = req.query.lang;
+  
+  // Priority: URL parameter > Accept-Language header > default to 'en'
+  let preferredLang = 'en';
+  
+  if (langParam && ['en', 'ja'].includes(langParam)) {
+    preferredLang = langParam;
+  } else if (acceptLanguage) {
+    if (acceptLanguage.includes('ja')) {
+      preferredLang = 'ja';
+    }
+  }
+  
+  req.preferredLanguage = preferredLang;
+  next();
+});
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/how-it-works.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'how-it-works.html'));
 });
 
 // Endpoint to receive an uploaded image. Field name: 'image'
 app.post('/upload', upload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
+  // Get language-specific messages
+  const messages = {
+    en: 'File received. AI classification not implemented yet. This is a placeholder response.',
+    ja: 'ファイルを受信しました。AI分類はまだ実装されていません。これはプレースホルダー応答です。'
+  };
+
   // Placeholder response: real AI classification will be implemented later
   res.json({
     filename: req.file.filename,
-    message: 'File received. AI classification not implemented yet. This is a placeholder response.',
-    prediction: null
+    message: messages[req.preferredLanguage] || messages.en,
+    prediction: null,
+    language: req.preferredLanguage
   });
 });
 

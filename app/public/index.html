@@ -6,44 +6,46 @@
     <title>BreastScan — AI-assisted Image Check</title>
     <link rel="stylesheet" href="/style.css" />
     <script src="/scroll-effects.js" defer></script>
+    <script src="/language-manager.js" defer></script>
   </head>
   <body>
     <nav class="nav">
-      <div class="brand">BreastScan</div>
+      <div class="brand" data-translate="nav.brand">BreastScan</div>
       <div class="links">
-        <a href="/" class="active">Presentation</a>
-        <a href="/app.html">App</a>
+        <a href="/" class="active" data-translate="nav.what_we_do">What We Do</a>
+        <a href="/how-it-works.html" data-translate="nav.how_it_works">How It Works</a>
+        <a href="/app.html" data-translate="nav.app">App</a>
       </div>
     </nav>
 
     <!-- Full-bleed hero like Apple: background image + overlay -->
     <section class="hero hero-image">
       <div class="hero-inner">
-        <h1 data-text="BreastScan">BreastScan</h1>
-        <p class="tag">AI-assisted image review to help clinicians with additional confirmation.</p>
+        <h1 data-text="BreastScan" data-translate="hero.title">BreastScan</h1>
+        <p class="tag" data-translate="hero.subtitle">AI-assisted image review to help clinicians with additional confirmation.</p>
       </div>
     </section>
 
     <main class="container">
       <section>
         <div class="upload-card presentation-content">
-          <h2>Empowering Clinical Judgment: A New Frontier in Breast Cancer Diagnostics</h2>
-          <p class="lead">Augmenting oncological expertise with secure, interpretable AI to foster a deeper narrative of care, from diagnosis to dialogue.</p>
+          <h2 data-translate="presentation.title">Empowering Clinical Judgment: A New Frontier in Breast Cancer Diagnostics</h2>
+          <p class="lead" data-translate="presentation.lead">Augmenting oncological expertise with secure, interpretable AI to foster a deeper narrative of care, from diagnosis to dialogue.</p>
 
-          <h3>The Global Challenge, The Personal Impact</h3>
-          <p>With breast cancer affecting 1 in 8 women in their lifetime, it represents one of modern medicine's most significant challenges. Behind every statistic is a unique individual, and for clinicians on the front lines, providing a timely, precise, and empathetic diagnosis is the critical first step in their journey. Our mission is to provide an additional layer of support for these crucial moments.</p>
+          <h3 data-translate="presentation.challenge_title">The Global Challenge, The Personal Impact</h3>
+          <p data-translate="presentation.challenge_text">With breast cancer affecting 1 in 8 women in their lifetime, it represents one of modern medicine's most significant challenges. Behind every statistic is a unique individual, and for clinicians on the front lines, providing a timely, precise, and empathetic diagnosis is the critical first step in their journey. Our mission is to provide an additional layer of support for these crucial moments.</p>
 
-          <h3>A Paradigm of Support, Not Replacement</h3>
-          <p>We introduce an advanced classification model designed not to replace, but to enhance the discerning eye of the medical professional. By analyzing diagnostic data through a sophisticated algorithmic lens, our technology provides a powerful, quantitative source of information. It serves as a trusted partner in the diagnostic process, offering supplementary insights to strengthen clinical confidence and streamline the path to a conclusive assessment.</p>
+          <h3 data-translate="presentation.paradigm_title">A Paradigm of Support, Not Replacement</h3>
+          <p data-translate="presentation.paradigm_text">We introduce an advanced classification model designed not to replace, but to enhance the discerning eye of the medical professional. By analyzing diagnostic data through a sophisticated algorithmic lens, our technology provides a powerful, quantitative source of information. It serves as a trusted partner in the diagnostic process, offering supplementary insights to strengthen clinical confidence and streamline the path to a conclusive assessment.</p>
 
-          <h3>Data Integrity and Patient Privacy: An Unwavering Commitment</h3>
-          <p>In an era of open AI, the sanctity of patient data is paramount. Publicly-available models often use submitted data for training, an unacceptable risk for sensitive medical information. Our system is different by design. It operates within a secure, proprietary, and closed-loop environment. Patient data is processed with the utmost confidentiality and is never used for external model training. We provide a powerful tool, not a data liability.</p>
+          <h3 data-translate="presentation.privacy_title">Data Integrity and Patient Privacy: An Unwavering Commitment</h3>
+          <p data-translate="presentation.privacy_text">In an era of open AI, the sanctity of patient data is paramount. Publicly-available models often use submitted data for training, an unacceptable risk for sensitive medical information. Our system is different by design. It operates within a secure, proprietary, and closed-loop environment. Patient data is processed with the utmost confidentiality and is never used for external model training. We provide a powerful tool, not a data liability.</p>
 
-          <h3>From Interpretation to Conversation: Enhancing Patient Comfort</h3>
-          <p>A clear diagnosis is the foundation of patient trust. Our model generates interpretable results that empower clinicians to articulate their findings with greater clarity and depth. This facilitates a more comprehensive patient dialogue, helping to transform moments of uncertainty into a collaborative and understandable plan for treatment and prevention. By providing a clearer picture, we help foster the comfort and comprehension every patient deserves.</p>
+          <h3 data-translate="presentation.conversation_title">From Interpretation to Conversation: Enhancing Patient Comfort</h3>
+          <p data-translate="presentation.conversation_text">A clear diagnosis is the foundation of patient trust. Our model generates interpretable results that empower clinicians to articulate their findings with greater clarity and depth. This facilitates a more comprehensive patient dialogue, helping to transform moments of uncertainty into a collaborative and understandable plan for treatment and prevention. By providing a clearer picture, we help foster the comfort and comprehension every patient deserves.</p>
         </div>
       </section>
-      <footer class="footer">For demo use only. Not a medical device.</footer>
+      <footer class="footer" data-translate="footer.disclaimer">For demo use only. Not a medical device.</footer>
     </main>
     <script src="/transitions.js"></script>
   </body>

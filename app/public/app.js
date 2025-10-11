@@ -5,6 +5,22 @@ const result = document.getElementById('result');
 
 let selectedFile = null;
 
+// Wait for language manager to be available
+function waitForLanguageManager() {
+  return new Promise((resolve) => {
+    if (window.languageManager) {
+      resolve(window.languageManager);
+    } else {
+      const checkInterval = setInterval(() => {
+        if (window.languageManager) {
+          clearInterval(checkInterval);
+          resolve(window.languageManager);
+        }
+      }, 100);
+    }
+  });
+}
+
 uploadInput.addEventListener('change', (e) => {
   const file = e.target.files && e.target.files[0];
   selectedFile = file || null;
@@ -31,26 +47,31 @@ uploadInput.addEventListener('change', (e) => {
 uploadBtn.addEventListener('click', async () => {
   if (!selectedFile) return;
 
+  const langManager = await waitForLanguageManager();
+  
   uploadBtn.disabled = true;
-  uploadBtn.innerHTML = '<span class="btn-icon">⏳</span> Analyzing...';
+  uploadBtn.innerHTML = `<span class="btn-icon">⏳</span> ${langManager.translate('app.analyzing')}`;
   result.textContent = '';
 
   const form = new FormData();
   form.append('image', selectedFile);
 
   try {
-    const res = await fetch('/upload', { method: 'POST', body: form });
+    const uploadUrl = `/upload?lang=${langManager.currentLanguage}`;
+    const res = await fetch(uploadUrl, { method: 'POST', body: form });
     const data = await res.json();
 
-    if (!res.ok) throw new Error(data.error || 'Upload failed');
+    if (!res.ok) throw new Error(data.error || langManager.translate('app.upload_failed'));
 
-    result.innerHTML = `<strong>Analysis Complete:</strong> ${data.filename}<br><em>${data.message}</em>`;
+    // Use server message if available, otherwise use translated message
+    const message = data.message || langManager.translate('app.analysis_complete');
+    result.innerHTML = `<strong>${langManager.translate('app.analysis_complete')}</strong> ${data.filename}<br><em>${message}</em>`;
     result.parentElement.classList.add('show');
   } catch (err) {
-    result.innerHTML = `<strong>Error:</strong> ${err.message}`;
+    result.innerHTML = `<strong>${langManager.translate('app.error')}</strong> ${err.message}`;
     result.parentElement.classList.add('show');
   } finally {
     uploadBtn.disabled = false;
-    uploadBtn.innerHTML = '<span class="btn-icon">🔍</span> Upload & Analyze';
+    uploadBtn.innerHTML = `<span class="btn-icon">🔍</span> ${langManager.translate('app.analyze_button')}`;
   }
 });

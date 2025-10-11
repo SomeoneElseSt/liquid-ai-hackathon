@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "brand": "BreastScan",
+    "what_we_do": "What We Do",
+    "how_it_works": "How It Works",
+    "app": "App",
+    "upload": "Upload"
+  },
+  "hero": {
+    "title": "BreastScan",
+    "subtitle": "AI-assisted image review to help clinicians with additional confirmation."
+  },
+  "presentation": {
+    "title": "Empowering Clinical Judgment: A New Frontier in Breast Cancer Diagnostics",
+    "lead": "Augmenting oncological expertise with secure, interpretable AI to foster a deeper narrative of care, from diagnosis to dialogue.",
+    "challenge_title": "The Global Challenge, The Personal Impact",
+    "challenge_text": "With breast cancer affecting 1 in 8 women in their lifetime, it represents one of modern medicine's most significant challenges. Behind every statistic is a unique individual, and for clinicians on the front lines, providing a timely, precise, and empathetic diagnosis is the critical first step in their journey. Our mission is to provide an additional layer of support for these crucial moments.",
+    "paradigm_title": "A Paradigm of Support, Not Replacement",
+    "paradigm_text": "We introduce an advanced classification model designed not to replace, but to enhance the discerning eye of the medical professional. By analyzing diagnostic data through a sophisticated algorithmic lens, our technology provides a powerful, quantitative source of information. It serves as a trusted partner in the diagnostic process, offering supplementary insights to strengthen clinical confidence and streamline the path to a conclusive assessment.",
+    "privacy_title": "Data Integrity and Patient Privacy: An Unwavering Commitment",
+    "privacy_text": "In an era of open AI, the sanctity of patient data is paramount. Publicly-available models often use submitted data for training, an unacceptable risk for sensitive medical information. Our system is different by design. It operates within a secure, proprietary, and closed-loop environment. Patient data is processed with the utmost confidentiality and is never used for external model training. We provide a powerful tool, not a data liability.",
+    "conversation_title": "From Interpretation to Conversation: Enhancing Patient Comfort",
+    "conversation_text": "A clear diagnosis is the foundation of patient trust. Our model generates interpretable results that empower clinicians to articulate their findings with greater clarity and depth. This facilitates a more comprehensive patient dialogue, helping to transform moments of uncertainty into a collaborative and understandable plan for treatment and prevention. By providing a clearer picture, we help foster the comfort and comprehension every patient deserves."
+  },
+  "how_it_works": {
+    "title": "How It Works",
+    "subtitle": "Advanced AI Fine-tuning Methodologies and Performance Metrics",
+    "methodology_title": "Fine-tuning Methodology",
+    "methodology_text": "Content about our fine-tuning methodologies will be added here.",
+    "performance_title": "Performance Metrics",
+    "performance_text": "Pre and post-training performance figures will be displayed here.",
+    "coming_soon": "Detailed content coming soon..."
+  },
+  "app": {
+    "title": "BreastScan Analysis",
+    "subtitle": "Upload an exam image to get an advisory classification",
+    "upload_label": "Upload Medical Image",
+    "upload_placeholder": "Drag and drop or click to upload",
+    "analyze_button": "Analyze Image",
+    "analyzing": "Analyzing...",
+    "analysis_complete": "Analysis Complete:",
+    "error": "Error:",
+    "upload_failed": "Upload failed"
+  },
+  "footer": {
+    "disclaimer": "For demo use only. Not a medical device."
+  },
+  "language": {
+    "english": "English",
+    "japanese": "日本語"
+  }
+}
