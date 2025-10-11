@@ -31,7 +31,7 @@
             3. Most likely diagnosis
               - Your diagnosis should be based on the findings in the image and the criteria above. Based on what you see, provide a recommendation for the doctor assessing this patient. You are essentially a second opinion radiologist, so you want to be as helpful as possible, stating what you aren't sure about and what you are sure about. You should provide only one recommendation, what evidence from the image drove you to your diagnosis, and what the most likely next step might be.
           
-          Outputs should be clinically grounded and accurate. If you're not sure, state so. Otherwise, state conversationally a diagonis for the image based on the criteria above. Do not offer analysis for criteria not listed above.", 
+          Outputs should be clinically grounded and accurate. If you're not sure, state so. Otherwise, state conversationally a diagonis for the image based on the criteria above. Do not offer analysis for criteria not listed above. Offer next steps based on the BI-Rads category.", 
         }
       ]
     },
@@ -40,11 +40,11 @@
       "content": [
         { 
           "type": "image", 
-          "image": "/images/0025a5dc99fd5c742026f0b2b030d3e9/2ddfad7286c2b016931ceccd1e2c7bbc.dicom" 
+          "image": "IMAGE-PATH" 
         },
         { 
           "type": "text", 
-          "text": "This is a left breast MLO view mammogram. What is the BI-RADS assessment for this breast? Please provide the category and a brief explanation." 
+          "text": "Please provide a complete radiological assessment of this mammogram. Include the BI-RADS category, detailed finding notes, your diagnosis, and any recommended next steps." 
         }
       ]
     },
@@ -53,7 +53,7 @@
       "content": [
         { 
           "type": "text", 
-          "text": "BI-RADS Category 2 (Benign). The mammogram shows benign findings with no evidence of malignancy. The breast density is classified as heterogeneously dense (Category C). Routine annual screening is recommended." 
+          "text": "This image shows..." 
         }
       ]
     }
