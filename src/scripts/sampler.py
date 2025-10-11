@@ -3,13 +3,13 @@ This script samples 1000 random entries from the breast-level_annotations.csv
 and creates a file `image_list.txt` containing the paths to the corresponding DICOM images.
 """
 from pathlib import Path
-import pandas as pd
+import pandas as pd  # pyright: ignore[reportMissingImports]
 
 # --- Constants ---
 # Use Path(__file__) to make paths relative to the script's location
 SCRIPT_DIR = Path(__file__).resolve().parent
 SRC_DIR = SCRIPT_DIR.parent
-CSV_PATH = SRC_DIR / "data/physionet.org/files/vindr-mammo/1.0.0/breast-level_annotations.csv"
+CSV_PATH = SRC_DIR / "data/breast-level_annotations.csv"
 OUTPUT_FILE_PATH = SCRIPT_DIR / "image_list.txt"
 SAMPLE_SIZE = 1000
 RANDOM_STATE = 42
@@ -29,8 +29,20 @@ def create_image_list_from_csv(csv_path, output_path, sample_size, random_state)
         print(f"An error occurred while reading the CSV: {e}")
         return
 
-    print(f"Sampling {sample_size} entries...")
-    sample_df = df.sample(n=sample_size, random_state=random_state)
+    print("Filtering images: laterality='L', view_position='MLO'")
+    filtered_df = df[(df['laterality'] == 'L') & (df['view_position'] == 'MLO')]
+
+    print("Grouping by study to select one image per study...")
+    unique_studies_df = filtered_df.drop_duplicates(subset=['study_id'], keep='first')
+
+    # Ensure we don't try to sample more than we have
+    num_available = len(unique_studies_df)
+    if sample_size > num_available:
+        print(f"Warning: Requested sample size ({sample_size}) is larger than the number of available unique images ({num_available}). Using all available images.")
+        sample_size = num_available
+
+    print(f"Sampling {sample_size} unique studies...")
+    sample_df = unique_studies_df.sample(n=sample_size, random_state=random_state)
 
     print(f"Writing image list to {output_path}...")
     try:
