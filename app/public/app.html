@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>BreastScan — App</title>
     <link rel="stylesheet" href="/style.css" />
+    <script src="/language-manager.js" defer></script>
   </head>
   <body>
     <nav class="nav">
@@ -18,15 +19,15 @@
 
     <main class="container">
       <div class="simple-header">
-        <h1>Medical Image Analysis</h1>
-        <p>Upload an image for AI analysis</p>
+        <h1 data-translate="app.header_title">Medical Image Analysis</h1>
+        <p data-translate="app.header_subtitle">Upload an image for AI analysis</p>
       </div>
       
       <div class="simple-upload">
         <input id="image-upload" type="file" accept="image/*" />
         <label for="image-upload" class="upload-zone">
           <div class="upload-icon">📁</div>
-          <div>Click to select image</div>
+          <div data-translate="app.upload_prompt">Click to select image</div>
         </label>
         
         <button id="upload-btn" class="analyze-btn" disabled data-translate="app.analyze_button">
