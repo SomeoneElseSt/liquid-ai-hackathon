@@ -141,6 +141,10 @@ if __name__ == "__main__":
     # Construct absolute paths for all test images
     test_images_dir = os.path.join(PROJECT_ROOT, "src", "data", "test-set", "images")
     test_images = sorted([os.path.join(test_images_dir, f) for f in os.listdir(test_images_dir) if f.endswith(".jpg")])
+    
+    # Limit to 3 images for quick testing
+    test_images = test_images[:3]
+    print(f"Testing with {len(test_images)} images")
 
     # Open CSV file and start batch analysis
     try:
