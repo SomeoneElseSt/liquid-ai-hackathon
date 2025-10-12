@@ -29,9 +29,16 @@
           <div>Click to select image</div>
         </label>
         
-        <button id="upload-btn" class="analyze-btn" disabled>
+        <button id="upload-btn" class="analyze-btn" disabled data-translate="app.analyze_button">
           Analyze Image
         </button>
+        
+        <div id="loader" class="loader" style="display: none;">
+          <p data-translate="app.analyzing">Analyzing...</p>
+          <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
         
         <div id="preview" class="preview"></div>
         <div id="result" class="result"></div>

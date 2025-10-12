@@ -1,54 +1,84 @@
-const uploadInput = document.getElementById('image-upload');
-const uploadBtn = document.getElementById('upload-btn');
-const preview = document.getElementById('preview');
-const result = document.getElementById('result');
+document.addEventListener('DOMContentLoaded', () => {
+  const imageUpload = document.getElementById('image-upload');
+  const uploadBtn = document.getElementById('upload-btn');
+  const preview = document.getElementById('preview');
+  const resultDiv = document.getElementById('result');
+  const loader = document.getElementById('loader');
+  const progressBar = document.querySelector('.progress-bar');
 
-let selectedFile = null;
+  let selectedFile = null;
 
-// Enable button by default
-uploadBtn.disabled = false;
+  imageUpload.addEventListener('change', () => {
+    selectedFile = imageUpload.files[0];
+    if (selectedFile) {
+      uploadBtn.disabled = false;
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.innerHTML = `<img src="${e.target.result}" alt="Image preview" />`;
+      };
+      reader.readAsDataURL(selectedFile);
+      resultDiv.style.display = 'none';
+      loader.style.display = 'none';
+    } else {
+      uploadBtn.disabled = true;
+      preview.innerHTML = '';
+    }
+  });
 
-uploadInput.addEventListener('change', (e) => {
-  const file = e.target.files && e.target.files[0];
-  selectedFile = file || null;
-  preview.innerHTML = '';
-  result.innerHTML = '';
+  uploadBtn.addEventListener('click', () => {
+    if (!selectedFile) return;
 
-  uploadBtn.disabled = false;
+    // UI setup for loading
+    uploadBtn.disabled = true;
+    preview.classList.add('loading');
+    resultDiv.style.display = 'none';
+    loader.style.display = 'block';
+    
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
 
-  if (selectedFile) {
-    // Show preview
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(selectedFile);
-    img.onload = () => URL.revokeObjectURL(img.src);
-    preview.appendChild(img);
-  }
-});
+    // Force reflow to start animation correctly
+    void progressBar.offsetWidth;
 
-uploadBtn.addEventListener('click', async () => {
-  if (!selectedFile) {
-    result.innerHTML = '<strong>Please select an image first</strong>';
-    return;
-  }
+    // Start 60s fake loading animation
+    progressBar.style.transition = 'width 60s linear';
+    progressBar.style.width = '100%';
 
-  uploadBtn.disabled = true;
-  uploadBtn.textContent = 'Analyzing...';
-  result.innerHTML = '';
+    const formData = new FormData();
+    formData.append('image', selectedFile);
 
-  const form = new FormData();
-  form.append('image', selectedFile);
+    const uploadPromise = fetch('/upload', {
+        method: 'POST',
+        body: formData,
+    }).then(response => response.json());
 
-  try {
-    const res = await fetch('/upload', { method: 'POST', body: form });
-    const data = await res.json();
+    const timerPromise = new Promise(resolve => setTimeout(resolve, 60000));
 
-    if (!res.ok) throw new Error(data.error || 'Upload failed');
+    Promise.all([uploadPromise, timerPromise]).then(([result]) => {
+        loader.style.display = 'none';
+        uploadBtn.disabled = false;
+        preview.classList.remove('loading');
+        
+        if (result.error) {
+            resultDiv.innerHTML = `<p><strong>Error:</strong> ${result.error}</p>`;
+            resultDiv.classList.add('error');
+        } else {
+            resultDiv.innerHTML = `
+                <p><strong>File:</strong> ${result.filename}</p>
+                <p><strong>Message:</strong> ${result.message}</p>
+            `;
+            resultDiv.classList.remove('error');
+        }
+        resultDiv.style.display = 'block';
+    }).catch(() => {
+        // This will catch fetch errors and is also delayed by the timer
+        loader.style.display = 'none';
+        uploadBtn.disabled = false;
+        preview.classList.remove('loading');
 
-    result.innerHTML = `<strong>Analysis Complete:</strong> ${data.filename}<br><em>${data.message || 'Image analyzed successfully'}</em>`;
-  } catch (err) {
-    result.innerHTML = `<strong>Error:</strong> ${err.message}`;
-  } finally {
-    uploadBtn.disabled = false;
-    uploadBtn.textContent = 'Analyze Image';
-  }
+        resultDiv.innerHTML = `<p><strong>Error:</strong> Could not connect to the server.</p>`;
+        resultDiv.classList.add('error');
+        resultDiv.style.display = 'block';
+    });
+  });
 });
