@@ -1,4 +1,4 @@
-# 🩺 Breast Cancer Detection AI
+# 🩺 OncoVision - Breast Cancer Detection AI
 
 This project, developed for the **Liquid AI Hackathon**, is a deep learning model designed to assist in the early detection of breast cancer. By leveraging a fine-tuned model, this tool serves as an additional checkpoint for medical professionals, aiming to improve diagnostic accuracy and save lives.
 
