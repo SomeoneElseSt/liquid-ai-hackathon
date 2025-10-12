@@ -7,6 +7,7 @@ import csv
 from transformers import AutoProcessor, AutoModelForImageTextToText
 from PIL import Image
 import torch
+import argparse
 
 class MammographyAssistant:
     def __init__(self, model_path):
@@ -33,7 +34,7 @@ class MammographyAssistant:
         print("✓ Model loaded")
     
     def analyze_mammogram(self, image_path, custom_prompt=None):
-        """
+        """ 
         Analyze a mammogram image
         
         Args:
@@ -121,10 +122,18 @@ if __name__ == "__main__":
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     # Get the project root (which is two levels up from src/scripts)
     PROJECT_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
-    # Construct the absolute model path
-    MODEL_PATH = os.path.join(PROJECT_ROOT, "mamography-finetune-4", "merged_model")
+    # Hardcoded model path for mamography-finetune-8
+    MODEL_PATH = os.path.join(PROJECT_ROOT, "models", "mamography-finetune-8", "merged_model")
     # Define the output CSV path
     RESULTS_CSV_PATH = os.path.join(PROJECT_ROOT, "mammography_results.csv")
+    
+    # Check if the model path exists
+    if not os.path.isdir(MODEL_PATH):
+        print(f"Error: Model directory not found at '{MODEL_PATH}'")
+        print("Please make sure the model is located at 'models/mamography-finetune-8/merged_model'")
+        exit(1)
+
+    print(f"Using model: {MODEL_PATH}")
     
     # Initialize assistant
     assistant = MammographyAssistant(MODEL_PATH)
