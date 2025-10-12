@@ -44,40 +44,31 @@ document.addEventListener('DOMContentLoaded', () => {
     progressBar.style.transition = 'width 60s linear';
     progressBar.style.width = '100%';
 
-    const formData = new FormData();
-    formData.append('image', selectedFile);
-
-    const uploadPromise = fetch('/upload', {
-        method: 'POST',
-        body: formData,
-    }).then(response => response.json());
-
     const timerPromise = new Promise(resolve => setTimeout(resolve, 60000));
 
-    Promise.all([uploadPromise, timerPromise]).then(([result]) => {
+    timerPromise.then(() => {
+        const currentLanguage = window.languageManager.currentLanguage || 'en';
+        const messages = {
+            en: 'File received. AI classification not implemented yet. This is a placeholder response.',
+            ja: 'ファイルを受信しました。AI分類はまだ実装されていません。これはプレースホルダー応答です。'
+        };
+
+        const result = {
+            filename: selectedFile.name,
+            message: messages[currentLanguage] || messages.en,
+            prediction: null,
+            language: currentLanguage
+        };
+        
         loader.style.display = 'none';
         uploadBtn.disabled = false;
         preview.classList.remove('loading');
         
-        if (result.error) {
-            resultDiv.innerHTML = `<p><strong>Error:</strong> ${result.error}</p>`;
-            resultDiv.classList.add('error');
-        } else {
-            resultDiv.innerHTML = `
-                <p><strong>File:</strong> ${result.filename}</p>
-                <p><strong>Message:</strong> ${result.message}</p>
-            `;
-            resultDiv.classList.remove('error');
-        }
-        resultDiv.style.display = 'block';
-    }).catch(() => {
-        // This will catch fetch errors and is also delayed by the timer
-        loader.style.display = 'none';
-        uploadBtn.disabled = false;
-        preview.classList.remove('loading');
-
-        resultDiv.innerHTML = `<p><strong>Error:</strong> Could not connect to the server.</p>`;
-        resultDiv.classList.add('error');
+        resultDiv.innerHTML = `
+            <p><strong>File:</strong> ${result.filename}</p>
+            <p><strong>Message:</strong> ${result.message}</p>
+        `;
+        resultDiv.classList.remove('error');
         resultDiv.style.display = 'block';
     });
   });
