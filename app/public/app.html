@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>BreastScan — Upload Exam Results</title>
+    <title>BreastScan — App</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
@@ -12,38 +12,32 @@
       <div class="links">
         <a href="/" data-translate="nav.what_we_do">What We Do</a>
         <a href="/how-it-works.html" data-translate="nav.how_it_works">How It Works</a>
-        <a href="/app.html" class="active" data-translate="nav.upload">Upload</a>
+        <a href="/app.html" class="active" data-translate="nav.app">App</a>
       </div>
     </nav>
 
     <main class="container">
-      <div class="hero-clean">
-        <h1 data-translate="app.title">BreastScan Analysis</h1>
-        <p class="tag" data-translate="app.subtitle">Upload an exam image to get an advisory classification</p>
+      <div class="simple-header">
+        <h1>Medical Image Analysis</h1>
+        <p>Upload an image for AI analysis</p>
       </div>
-      <div class="upload-card">
-        <div class="upload-content">
-          <label for="image-upload" class="upload-label" data-translate="app.upload_label">Upload Medical Image</label>
-          <div class="upload-area">
-            <input id="image-upload" type="file" accept="image/*" />
-            <div class="upload-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span data-translate="app.upload_placeholder">Drag and drop or click to upload</span>
-            </div>
-          </div>
-          <button id="upload-btn" class="primary" disabled>
-            <span data-translate="app.analyze_button">Analyze Image</span>
-          </button>
-          <div id="preview" class="preview"></div>
-          <div id="result" class="result"></div>
-        </div>
+      
+      <div class="simple-upload">
+        <input id="image-upload" type="file" accept="image/*" />
+        <label for="image-upload" class="upload-zone">
+          <div class="upload-icon">📁</div>
+          <div>Click to select image</div>
+        </label>
+        
+        <button id="upload-btn" class="analyze-btn" disabled>
+          Analyze Image
+        </button>
+        
+        <div id="preview" class="preview"></div>
+        <div id="result" class="result"></div>
       </div>
-      <footer class="footer" data-translate="footer.disclaimer">For demo use only. Not a medical device.</footer>
     </main>
 
-    <script src="/transitions.js"></script>
     <script src="/app.js"></script>
   </body>
 </html>

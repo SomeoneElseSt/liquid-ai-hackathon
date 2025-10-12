@@ -778,18 +778,202 @@ h1{margin:0;font-size:56px;font-weight:400;color:var(--text);line-height:1.03}
 
 .primary:hover:not([disabled]) {
     box-shadow: 0 0 20px var(--accent-glow);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 .primary:hover:not([disabled])::before {
-    opacity: 0.1;
+    opacity: 1;
 }
 
-.primary[disabled] {
+.primary:hover:not([disabled]) span {
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.primary:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    border-color: var(--muted);
+    transform: none;
+}
+
+/* Enhanced Upload Button Styles */
+.upload-btn-enhanced {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    min-width: 200px;
+    background: linear-gradient(135deg, var(--card) 0%, rgba(17, 24, 39, 0.8) 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+
+.upload-btn-enhanced::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: var(--tech-gradient);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+}
+
+.upload-btn-enhanced .btn-icon {
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.upload-btn-enhanced .btn-text {
+    z-index: 2;
+    position: relative;
+}
+
+.upload-btn-enhanced .btn-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--tech-gradient);
+    opacity: 0;
+    animation: pulse-glow 2s infinite;
+    z-index: 0;
+}
+
+.upload-btn-enhanced:not([disabled]):hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 10px 30px rgba(0, 229, 255, 0.3),
+        0 0 50px rgba(99, 102, 241, 0.2);
+}
+
+.upload-btn-enhanced:not([disabled]):hover .btn-icon {
+    transform: rotate(15deg) scale(1.1);
+    color: white;
+}
+
+.upload-btn-enhanced:not([disabled]):hover .btn-text {
+    color: white;
+}
+
+.upload-btn-enhanced:not([disabled]):active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.upload-btn-enhanced:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.upload-btn-enhanced:disabled .btn-pulse {
+    animation: none;
+}
+
+/* Simple App Page Styles */
+.simple-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+}
+
+.simple-header h1 {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.simple-header p {
     color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.simple-upload {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.simple-upload input[type="file"] {
+    display: none;
+}
+
+.upload-zone {
+    display: block;
+    border: 2px dashed var(--accent);
+    border-radius: 12px;
+    padding: 60px 20px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 229, 255, 0.05);
+}
+
+.upload-zone:hover {
+    border-color: var(--accent-bright);
+    background: rgba(0, 229, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.upload-zone div:last-child {
+    color: var(--text);
+    font-size: 1.1rem;
+}
+
+.analyze-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.analyze-btn:hover:not(:disabled) {
+    background: var(--accent-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3);
+}
+
+.analyze-btn:disabled {
+    background: var(--muted);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.preview {
+    margin-top: 20px;
+}
+
+.preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--card);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+    text-align: left;
 }
 
 /* Upload Page Specific Styles */
