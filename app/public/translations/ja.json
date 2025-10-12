@@ -40,7 +40,10 @@
     "analyzing": "分析中...",
     "analysis_complete": "分析完了：",
     "error": "エラー：",
-    "upload_failed": "アップロードに失敗しました"
+    "upload_failed": "アップロードに失敗しました",
+    "header_title": "医療画像分析",
+    "header_subtitle": "AI分析のために画像をアップロードしてください",
+    "upload_prompt": "クリックして画像を選択"
   },
   "footer": {
     "disclaimer": "デモ用途のみ。医療機器ではありません。"

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const imageUpload = document.getElementById('image-upload');
-  const uploadBtn = document.getElementById('upload-btn');
+  const uploadBtn = document.getElementById('upload-btn'); // Vercel 
   const preview = document.getElementById('preview');
   const resultDiv = document.getElementById('result');
   const loader = document.getElementById('loader');

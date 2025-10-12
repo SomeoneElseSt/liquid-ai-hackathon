@@ -40,7 +40,10 @@
     "analyzing": "Analyzing...",
     "analysis_complete": "Analysis Complete:",
     "error": "Error:",
-    "upload_failed": "Upload failed"
+    "upload_failed": "Upload failed",
+    "header_title": "Medical Image Analysis",
+    "header_subtitle": "Upload an image for AI analysis",
+    "upload_prompt": "Click to select image"
   },
   "footer": {
     "disclaimer": "For demo use only. Not a medical device."
