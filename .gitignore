@@ -1,3 +1,22 @@
 src/data/
 src/.DS_Store
 src/scripts/.env
+
+# Ignore large model weight files but keep configs
+models/**/model.safetensors
+models/**/pytorch_model.bin
+models/**/*.bin
+models/**/tokenizer.json
+models/**/*.pth
+models/**/*.pt
+models/**/*.h5
+models/**/*.ckpt
+
+# Ignore virtual environments
+src/scripts/.venv/
+**/venv/
+**/__pycache__/
+*.pyc
+
+# Ignore test results
+mammography_results.csv
