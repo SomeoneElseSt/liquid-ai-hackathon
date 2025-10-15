@@ -112,7 +112,6 @@ def get_clinical_action(birads_value):
 def create_assistant_response(findings, acr_value, birads_value):
     clinical_action = get_clinical_action(birads_value)
 
-    # Natural, conversational style using randomized templates
     responses = [
         f"Assessment: {findings}. Breast density is ACR {acr_value}. This is classified as BI-RADS {birads_value}. {clinical_action}",
         f"The mammogram shows {findings}, with ACR {acr_value} density. I would classify this as BI-RADS {birads_value}. {clinical_action}",
