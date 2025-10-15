@@ -1,4 +1,4 @@
-src/data/
+src/data/trainset
 src/.DS_Store
 src/scripts/.env
 
